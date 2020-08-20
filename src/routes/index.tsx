@@ -7,7 +7,7 @@ import Applications from '../pages/Applications';
 const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={Dashboard} />
-    <Route path="/applications" component={Applications} />
+    <Route path="/applications/:application+" component={Applications} />
   </Switch>
 );
 

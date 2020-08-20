@@ -14,11 +14,11 @@ export default createGlobalStyle`
   }
 
   border-style, input, button {
-    font: 16px, sans-serif;
+    font: 16px, 'Lato', sans-serif;
   }
 
   #root {
-    max-width: 960px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 40px 20px;
   }
