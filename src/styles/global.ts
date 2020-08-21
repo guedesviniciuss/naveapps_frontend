@@ -13,14 +13,9 @@ export default createGlobalStyle`
     --webkit-font-smoothing: antialiased;
   }
 
-  border-style, input, button {
-    font: 16px, 'Lato', sans-serif;
-  }
-
-  #root {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
+  body, input, button {
+    font-size: 16px;
+    font-family: Poppins, sans-serif;
   }
 
   button {

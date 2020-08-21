@@ -3,9 +3,10 @@ import { shade } from 'polished';
 
 export const Title = styled.h1`
   font-size: 48px;
-  color: #3a3a3a;
+
+  color: #fff;
   line-height: 56px;
-  margin-top: 80px;
+  margin-top: 60px;
   max-width: 600px;
 `;
 
@@ -119,7 +120,7 @@ export const Projects = styled.div`
         display: block;
         display: flex;
         justify-content: start;
-        align-content: center;
+        align-items: center;
 
         margin-left: 0;
         margin-top: 10px;
@@ -144,4 +145,14 @@ export const Projects = styled.div`
       color: #cbcbcb;
     }
   }
+`;
+
+export const Container = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
+export const Hero = styled.div`
+  background: #ccd2e4;
+  padding: 150px 20px;
 `;

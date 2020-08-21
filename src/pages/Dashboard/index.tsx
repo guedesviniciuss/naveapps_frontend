@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import { FiChevronRight } from 'react-icons/fi';
 import { FaHeart } from 'react-icons/fa';
 
-import { Partners, Title, Form, Projects } from './styles';
+import { Partners, Title, Form, Projects, Container, Hero } from './styles';
 import logo from '../../assets/naveapps.svg';
+import logoNave from '../../assets/logo_nave.png';
+import logoOiFuturo from '../../assets/logo_oi_futuro.png';
 
 import api from '../../services/api';
 
@@ -36,49 +38,49 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-      <Partners>
-        <img src={logo} alt="NaveApps Logo" />
-        <div>
-          <img
-            src="https://oifuturo.org.br/wp-content/uploads/2018/09/logo_NAVE.png"
-            alt="NAVE"
-          />
-          <img
-            src="https://oifuturo.org.br/wp-content/uploads/2020/04/OiFuturo_LogoColorida-01.png"
-            alt="Oi Futuro"
-          />
-        </div>
-      </Partners>
-      <Title>Veja nossos projetos feitos com carinho</Title>
-      <Form onSubmit={handleFilterProjects}>
-        <input
-          type="text"
-          value={searchProject}
-          onChange={e => setSearchProject(e.target.value)}
-          placeholder="Pesquise um projeto feito por nós 🔍"
-        />
-        <button type="submit">Pesquisar</button>
-      </Form>
-      <Projects>
-        {projects?.map(project => (
-          <Link to="/applications" key={project.id}>
-            <img
-              src="http://www.thepopularapps.com/application/upload/Apps/2016/02/apocadino-1.png"
-              alt="app"
-            />
+      <Hero>
+        <Container>
+          <Partners>
+            <img src={logo} alt="NaveApps Logo" />
             <div>
-              <strong>{project.name}</strong>
-              <p>{project.summary}</p>
-              <div>
-                <FaHeart size={15} />
-                <p>{project.likes}</p>
-              </div>
+              <img src={logoNave} alt="NAVE" />
+              <img src={logoOiFuturo} alt="Oi Futuro" />
             </div>
+          </Partners>
+          <Title>Veja nossos projetos feitos com carinho</Title>
+          <Form onSubmit={handleFilterProjects}>
+            <input
+              type="text"
+              value={searchProject}
+              onChange={e => setSearchProject(e.target.value)}
+              placeholder="Pesquise um projeto feito por nós 🔍"
+            />
+            <button type="submit">Pesquisar</button>
+          </Form>
+        </Container>
+      </Hero>
+      <Container>
+        <Projects>
+          {projects?.map(project => (
+            <Link to="/applications" key={project.id}>
+              <img
+                src="http://www.thepopularapps.com/application/upload/Apps/2016/02/apocadino-1.png"
+                alt="app"
+              />
+              <div>
+                <strong>{project.name}</strong>
+                <p>{project.summary}</p>
+                <div>
+                  <FaHeart size={15} />
+                  <p>{project.likes}</p>
+                </div>
+              </div>
 
-            <FiChevronRight size={20} />
-          </Link>
-        ))}
-      </Projects>
+              <FiChevronRight size={20} />
+            </Link>
+          ))}
+        </Projects>
+      </Container>
     </>
   );
 };
