@@ -62,7 +62,7 @@ const Dashboard: React.FC = () => {
       <Container>
         <Projects>
           {projects?.map(project => (
-            <Link to="/applications" key={project.id}>
+            <Link to={`/projects/${project.name}`} key={project.id}>
               <img
                 src="http://www.thepopularapps.com/application/upload/Apps/2016/02/apocadino-1.png"
                 alt="app"

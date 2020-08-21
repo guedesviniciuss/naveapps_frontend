@@ -77,19 +77,21 @@ export const Projects = styled.div`
   a {
     background: #fff;
     border-radius: 5px;
-    width: 100%;
+    width: 45%;
     padding: 24px;
-    display: block;
+    /* display: block; */
     text-decoration: none;
 
     display: flex;
-    flex: 1;
+    /* flex: 1; */
     align-items: center;
     transition: transform 0.5s;
 
-    & + a {
+    /* excluir */
+    margin: 10px;
+    /* & + a {
       margin-left: 10px;
-    }
+    } */
 
     &:hover {
       transform: translateY(-5px);
