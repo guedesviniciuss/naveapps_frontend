@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
 
-export const Test = styled.h1`
-  color: red;
-`;
-
 export const Container = styled.div`
   height: 100vh;
   display: flex;
@@ -13,46 +9,60 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   display: flex;
+  flex: 1;
+
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
-  /*max-width: 700px;*/
 
   border-radius: 10px;
   form {
-    background: #fff;
     border-radius: 10px;
-    margin: 80px 0;
-    width: 340px;
+    max-width: 500px;
     padding: 30px;
+
+    h1 {
+      text-align: center;
+      color: #9197a9;
+    }
+
     input {
       width: 100%;
-      /*margin-top: 10px;
-      margin-bottom: 10px;*/
-      & + input {
-        margin-top: 10px;
+      flex: 1;
+      height: 70px;
+      padding: 0 24px;
+      border: 0px;
+      border-radius: 5px;
+      color: #3a3a3a;
+
+      margin-top: 20px;
+
+      &::placeholder {
+        color: #a8a8b3;
       }
     }
+
     button {
       width: 100%;
       border: 0px;
-      margin-top: 20px;
-      height: 35px;
+      height: 70px;
       background: #04d361;
-      border-radius: 0 5px 5px 0;
+      border-radius: 5px;
       color: #fff;
       font-weight: bold;
-      font-size: 12px;
       transition: background-color 0.2s;
+      margin-top: 20px;
 
       &:hover {
         background: ${shade(0.1, '#04d361')};
       }
     }
+
     svg {
       display: flex;
       width: 100%;
+      color: #ccd2e4;
     }
   }
 `;
