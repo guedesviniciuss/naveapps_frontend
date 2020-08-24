@@ -61,24 +61,30 @@ const Dashboard: React.FC = () => {
       </Hero>
       <Container>
         <Projects>
-          {projects?.map(project => (
-            <Link to={`/projects/${project.name}`} key={project.id}>
-              <img
-                src={`http://localhost:3333/${project.thumbnail}`}
-                alt="app"
-              />
-              <div>
-                <strong>{project.name}</strong>
-                <p>{project.summary}</p>
+          {!(projects.length > 0) ? (
+            <h1>
+              Não foi possível carregar novas aplicações, tente mais tarde
+            </h1>
+          ) : (
+            projects?.map(project => (
+              <Link to={`/projects/${project.name}`} key={project.id}>
+                <img
+                  src={`http://localhost:3333/${project.thumbnail}`}
+                  alt="app"
+                />
                 <div>
-                  <FaHeart size={15} />
-                  <p>{project.likes}</p>
+                  <strong>{project.name}</strong>
+                  <p>{project.summary}</p>
+                  <div>
+                    <FaHeart size={15} />
+                    <p>{project.likes}</p>
+                  </div>
                 </div>
-              </div>
 
-              <FiChevronRight size={20} />
-            </Link>
-          ))}
+                <FiChevronRight size={20} />
+              </Link>
+            ))
+          )}
         </Projects>
       </Container>
     </>

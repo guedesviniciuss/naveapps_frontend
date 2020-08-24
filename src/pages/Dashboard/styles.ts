@@ -73,6 +73,15 @@ export const Projects = styled.div`
 
   display: flex;
   flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+
+  h1 {
+    margin: 50px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #a8a8b3;
+  }
 
   a {
     background: #fff;
