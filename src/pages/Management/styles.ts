@@ -39,13 +39,9 @@ export const TableContainer = styled.section`
         color: #363f5f;
       }
 
-      &.income {
-        color: #12a454;
-      }
-
-      &.outcome {
-        color: #e83f5b;
-      }
+      /*svg:first-of-type {
+        margin-right: 35px;
+      }*/
     }
 
     td:first-child {
