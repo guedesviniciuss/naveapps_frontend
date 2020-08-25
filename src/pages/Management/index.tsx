@@ -6,12 +6,15 @@ import api from '../../services/api';
 
 import { Container, TableContainer } from './styles';
 
+import dateConverter from '../../utils/dateConverter';
+
 interface Project {
   id: string;
   name: string;
-  created_at: Date;
-  updated_at: Date;
+  created_at: string; // tratar como Date
+  updated_at: string; // tratar como Date
 }
+
 const Dashboard: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
 
@@ -20,11 +23,19 @@ const Dashboard: React.FC = () => {
       const response = await api.get<Project[]>('/applications');
       setProjects([...projects, ...response.data]);
     }
+
     getApiProjects();
   }, []);
 
   async function handleDelete(id: string): Promise<void> {
     const application = await api.delete(`/applications/${id}`);
+
+    console.log(application.data);
+
+    // temos um array e queremos remover um elemento de dentro desse array
+    const projectsUpdated = projects.filter(p => p.id !== id);
+    setProjects([...projectsUpdated]);
+
     console.log(id);
   }
 
@@ -47,12 +58,12 @@ const Dashboard: React.FC = () => {
               {projects?.map(project => (
                 <tr key={project.id}>
                   <td>{project.name}</td>
-                  <td>{project.created_at}</td>
-                  <td>{project.updated_at}</td>
+                  <td>{dateConverter(project.created_at)}</td>
+                  <td>{dateConverter(project.updated_at)}</td>
                   <td>
                     <button onClick={() => handleDelete(project.id)}>
                       <DeleteIcon size={20} />
-                    </button>{' '}
+                    </button>
                     <button>
                       <UpdateIcon size={20} />
                     </button>

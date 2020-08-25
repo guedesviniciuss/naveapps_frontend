@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { shade } from 'polished';
 
 interface CardProps {
   total?: boolean;
@@ -38,10 +39,26 @@ export const TableContainer = styled.section`
       &.title {
         color: #363f5f;
       }
+      button {
+        width: 42px;
+        height: 28px;
+        justify-content: center;
+        border: 0px;
+        background: #04d361;
+        border-radius: 5px 5px 5px 5px;
+        color: #fff;
+        font-weight: bold;
+        transition: background-color 0.2s;
 
-      /*svg:first-of-type {
-        margin-right: 35px;
-      }*/
+        &:hover {
+          background: ${shade(0.1, '#04d361')};
+        }
+
+        svg {
+          display: inline-block;
+          vertical-align: middle;
+        }
+      }
     }
 
     td:first-child {
