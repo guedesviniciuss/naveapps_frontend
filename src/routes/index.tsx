@@ -5,6 +5,7 @@ import Dashboard from '../pages/Dashboard';
 import Applications from '../pages/Applications';
 import Login from '../pages/Login';
 import Management from '../pages/Management';
+import FormCreateApp from '../pages/FormCreateApp';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -12,6 +13,7 @@ const Routes: React.FC = () => (
     <Route path="/projects/:project+" component={Applications} />
     <Route path="/login" component={Login} />
     <Route path="/management" component={Management} />
+    <Route path="/createapp" component={FormCreateApp} />
   </Switch>
 );
 
