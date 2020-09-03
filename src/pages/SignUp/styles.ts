@@ -27,14 +27,14 @@ export const Content = styled.div`
     color: #e56381;
     text-decoration: none;
     font-weight: 700;
-    display: block;
+    display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 24px;
     transition: color 0ms.2s;
 
     svg {
-      margin-right: 10px;
+      margin-right: 3px;
     }
 
     &:hover {
