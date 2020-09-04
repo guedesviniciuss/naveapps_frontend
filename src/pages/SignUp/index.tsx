@@ -1,4 +1,5 @@
 import React from 'react';
+import { Form } from '@unform/web';
 import { FiUser, FiMail, FiLock, FiChevronLeft } from 'react-icons/fi';
 import { Container, Content } from './styles';
 
@@ -7,12 +8,16 @@ import Button from '../../components/Button';
 
 import logo from '../../assets/naveapps.svg';
 
-const SignUp: React.FC = () => (
-  <>
+const SignUp: React.FC = () => {
+  function handleSubmit(data: any): void {
+    console.log(data);
+  }
+
+  return (
     <Container>
       <Content>
         <img src={logo} alt="" />
-        <form>
+        <Form onSubmit={handleSubmit}>
           <Input
             name="username"
             type="username"
@@ -35,14 +40,14 @@ const SignUp: React.FC = () => (
             placeholder="Senha"
           />
           <Button type="submit">Solicitar Criação</Button>
-        </form>
+        </Form>
         <a href="login">
           <FiChevronLeft size={30} />
           Voltar para o login
         </a>
       </Content>
     </Container>
-  </>
-);
+  );
+};
 
 export default SignUp;

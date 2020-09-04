@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
+import { Form } from '@unform/web';
 import { FiMail, FiLock, FiLogIn } from 'react-icons/fi';
 import { Container, Content } from './styles';
 
@@ -7,12 +8,16 @@ import Button from '../../components/Button';
 
 import logo from '../../assets/naveapps.svg';
 
-const Login: React.FC = () => (
-  <>
+const Login: React.FC = () => {
+  function handleSubmit(data: any): void {
+    console.log(data);
+  }
+
+  return (
     <Container>
       <Content>
         <img src={logo} alt="" />
-        <form>
+        <Form onSubmit={handleSubmit}>
           <Input
             name="email"
             type="text"
@@ -29,14 +34,14 @@ const Login: React.FC = () => (
           />
           <Button type="submit">Entrar</Button>
           <a href="recuperar">Esqueci minha senha</a>
-        </form>
+        </Form>
         <a href="login">
           <FiLogIn />
           Criar Conta
         </a>
       </Content>
     </Container>
-  </>
-);
+  );
+};
 
 export default Login;
