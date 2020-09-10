@@ -47,6 +47,7 @@ export const Content = styled.div`
     max-width: 500px;
     padding: 30px;
     text-align: center;
+    width: 100%;
 
     > a {
       text-decoration: none;
