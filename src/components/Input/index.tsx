@@ -39,7 +39,7 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
   }, [fieldName, registerField]);
 
   return (
-    <Container isFocused={isFocused} isFilled={isFilled}>
+    <Container isErrored={!!error} isFocused={isFocused} isFilled={isFilled}>
       {Icon && <Icon size={30} />}
       <input
         defaultValue={defaultValue}
@@ -48,6 +48,8 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
         onBlur={handleInputBlur}
         {...rest}
       />
+
+      {error}
     </Container>
   );
 };

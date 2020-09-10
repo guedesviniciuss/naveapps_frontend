@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
+import * as Yup from 'yup';
 import { Form } from '@unform/web';
+import { FormHandles } from '@unform/core';
 import { FiUser, FiMail, FiLock, FiChevronLeft } from 'react-icons/fi';
 import { Container, Content } from './styles';
+
+import getValidationErrors from '../../utils/getValidationErrors';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -9,20 +13,37 @@ import Button from '../../components/Button';
 import logo from '../../assets/naveapps.svg';
 
 const SignUp: React.FC = () => {
-  function handleSubmit(data: any): void {
-    console.log(data);
-  }
+  const formRef = useRef<FormHandles>(null);
+
+  const handleSubmit = useCallback(async (data: object) => {
+    try {
+      formRef.current?.setErrors({});
+
+      const schema = Yup.object().shape({
+        name: Yup.string().required('Nome obrigatório'),
+        email: Yup.string()
+          .required('E-mail obrigatório')
+          .email('E-mail inválido'),
+        password: Yup.string().min(6, 'No minímo 6 caracteres'),
+      });
+
+      await schema.validate(data, { abortEarly: false });
+    } catch (err) {
+      const errors = getValidationErrors(err);
+      formRef.current?.setErrors(errors);
+    }
+  }, []);
 
   return (
     <Container>
       <Content>
         <img src={logo} alt="" />
-        <Form onSubmit={handleSubmit}>
+        <Form ref={formRef} onSubmit={handleSubmit}>
           <Input
-            name="username"
-            type="username"
+            name="name"
+            type="name"
             icon={FiUser}
-            id="username"
+            id="name"
             placeholder="Nome de usuário"
           />
           <Input
