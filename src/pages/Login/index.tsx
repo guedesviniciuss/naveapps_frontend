@@ -1,20 +1,30 @@
 import React, { useCallback, useRef } from 'react';
 import * as Yup from 'yup';
+import { Link } from 'react-router-dom';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import { FiMail, FiLock, FiLogIn } from 'react-icons/fi';
 import { Container, Content } from './styles';
 
-import getValidationErrors from '../../utils/getValidationErrors';
+import { useAuth } from '../../hooks/AuthContext';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 import logo from '../../assets/naveapps.svg';
 
+import getValidationErrors from '../../utils/getValidationErrors';
+
+interface SignInFormData {
+  email: string;
+  password: string;
+}
+
 const Login: React.FC = () => {
+  const { user, signIn } = useAuth();
+
   const formRef = useRef<FormHandles>(null);
-  const handleSubmit = useCallback(async (data: object) => {
+  const handleSubmit = useCallback(async (data: SignInFormData) => {
     try {
       const schema = Yup.object({
         email: Yup.string()
@@ -24,6 +34,10 @@ const Login: React.FC = () => {
       });
 
       await schema.validate(data, { abortEarly: false });
+      signIn({
+        email: data.email,
+        password: data.password,
+      });
     } catch (err) {
       const errors = getValidationErrors(err);
       formRef.current?.setErrors(errors);
@@ -52,10 +66,10 @@ const Login: React.FC = () => {
           <Button type="submit">Entrar</Button>
           <a href="recuperar">Esqueci minha senha</a>
         </Form>
-        <a href="login">
+        <Link to="/signup">
           <FiLogIn />
           Criar Conta
-        </a>
+        </Link>
       </Content>
     </Container>
   );
