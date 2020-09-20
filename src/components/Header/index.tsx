@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import logo from '../../assets/symbol_naveapps.svg';
 import logoNave from '../../assets/logo_nave.png';
@@ -8,9 +9,18 @@ import { MainHeader } from './styles';
 const Header: React.FC = () => (
   <>
     <MainHeader>
-      <strong>Entrar</strong>
-      <img src={logo} alt="lal1" />
-      <strong>Sair</strong>
+      <div>
+        <ul>
+          <li>
+            <Link to="/users">Usuários</Link>
+          </li>
+          <li>
+            <Link to="/management">Aplicações</Link>
+          </li>
+        </ul>
+        <img src={logo} alt="lal1" />
+        <strong>Sair</strong>
+      </div>
     </MainHeader>
   </>
 );
