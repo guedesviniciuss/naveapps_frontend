@@ -36,7 +36,7 @@ interface ProjectParams {
 }
 
 const Applications: React.FC = () => {
-  const [project, setProject] = useState<Project | null>(null);
+  const [application, setApplication] = useState<Project | null>(null);
 
   const { params: projectParams } = useRouteMatch<ProjectParams>();
 
@@ -46,10 +46,14 @@ const Applications: React.FC = () => {
         `/applications/${projectParams.project}`,
       );
       console.log(response.data);
-      setProject({ ...response.data });
+      setApplication({ ...response.data });
     }
     getApiProject();
   }, [projectParams.project]);
+
+  async function handleLikeApp(id: string): Promise<void> {
+    await api.post(`/applications/likes/${id}`);
+  }
 
   return (
     <>
@@ -62,53 +66,43 @@ const Applications: React.FC = () => {
             <img src={logoOiFuturo} alt="Oi Futuro" />
           </div>
         </Partners>
-        <Project>
-          <Hero />
-          <Main>
-            <div>
-              <Title>Apocadino</Title>
-              <LikedInfo>
-                <FaHeart size={15} />
-                <p>{project?.likes}</p>
-              </LikedInfo>
-            </div>
-            <p>
-              It is a long established fact that a reader will be distracted by
-              the readable content of a page when looking at its layout. The
-              point of using Lorem Ipsum is that it has a more-or-less normal
-              distribution of
-            </p>
-          </Main>
-          <hr />
-          <Description>
-            <h1>Descrição</h1>
-            <p>
-              It is a long established fact that a reader will be distracted by
-              the readable content of a page when looking at its layout. The
-              point of using Lorem Ipsum is that it has a more-or-less normal
-              distribution of letters, as opposed to using Content here, content
-              here, making it look like readable English. Many desktop
-              publishing packages and web page editors now use Lorem Ipsum as
-              their default model text, and a search for lorem ipsum will
-              uncover many web sites still in their infancy. Various versions
-              have evolved over the years, sometimes by accident, sometimes on
-              purpose (injected humour and the like).
-            </p>
-          </Description>
-          <Gallery>
-            <img src="https://dummyimage.com/400x400/d134d1/ffffff" alt="" />
-            <img src="https://dummyimage.com/400x400/d134d1/ffffff" alt="" />
-            <img src="https://dummyimage.com/400x400/d134d1/ffffff" alt="" />
-          </Gallery>
-        </Project>
-        <FixedButtons>
-          <Button type="button" typeButton="download">
-            <FiDownload size={25} />
-          </Button>
-          <Button type="button" typeButton="like">
-            <FiHeart size={25} />
-          </Button>
-        </FixedButtons>
+        {!application ? null : (
+          <Project>
+            <Hero />
+            <Main>
+              <div>
+                <Title>{application.name}</Title>
+                <LikedInfo>
+                  <FaHeart size={15} />
+                  <p>{application?.likes}</p>
+                </LikedInfo>
+              </div>
+              <p>{application.summary}</p>
+            </Main>
+            <hr />
+            <Description>
+              <h1>Descrição</h1>
+              <p>{application.description}</p>
+            </Description>
+            <Gallery>
+              <img src="https://dummyimage.com/400x400/d134d1/ffffff" alt="" />
+              <img src="https://dummyimage.com/400x400/d134d1/ffffff" alt="" />
+              <img src="https://dummyimage.com/400x400/d134d1/ffffff" alt="" />
+            </Gallery>
+            <FixedButtons>
+              <Button type="button" typeButton="download">
+                <FiDownload size={25} />
+              </Button>
+              <Button
+                type="button"
+                typeButton="like"
+                onClick={() => handleLikeApp(application.id)}
+              >
+                <FiHeart size={25} />
+              </Button>
+            </FixedButtons>
+          </Project>
+        )}
       </Container>
     </>
   );
