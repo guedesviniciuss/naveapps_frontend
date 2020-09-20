@@ -1,17 +1,36 @@
-import React, { useState, useEffect, MouseEvent } from 'react';
+import React from 'react';
 
-import { Container, Content } from './styles';
+import { Container, Content, Title } from './styles';
+
+import Header from '../../components/Header';
+
+import Dropzone from '../../components/UploadFile';
 
 const FormCreateApp: React.FC = () => {
   return (
     <>
+      <Header />
       <Container>
         <Content>
           <form>
-            <h1>Cadastre-se</h1>
-            <input type="text" id="email" placeholder="E-mail" />
-            <input type="password" id="password" placeholder="Senha" />
-            <button type="submit">Entrar</button>
+            <Title>Cadastre seu aplicativo</Title>
+            <div>
+              <Dropzone
+                dropzoneText="Coloque as imagens aqui"
+                filesLimit={5}
+                acceptedFiles={['.jpg', '.png']}
+              />
+            </div>
+
+            <input type="text" id="Nome" placeholder="Nome" />
+            <input type="text" id="summary" placeholder="Sumario" />
+            <textarea
+              id="description"
+              placeholder="Descricao"
+              rows={4}
+              cols={20}
+            />
+            <button type="submit">Enviar</button>
           </form>
         </Content>
       </Container>
