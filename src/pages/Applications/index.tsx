@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { FaHeart } from 'react-icons/fa';
+import { FiHeart, FiDownload } from 'react-icons/fi';
 
 import {
   Container,
@@ -9,8 +10,11 @@ import {
   Hero,
   Project,
   Title,
-  Like,
+  LikedInfo,
+  Button,
+  FixedButtons,
   Gallery,
+  Description,
 } from './styles';
 import logo from '../../assets/naveapps.svg';
 import logoNave from '../../assets/logo_nave.png';
@@ -63,10 +67,10 @@ const Applications: React.FC = () => {
           <Main>
             <div>
               <Title>Apocadino</Title>
-              <Like>
+              <LikedInfo>
                 <FaHeart size={15} />
                 <p>{project?.likes}</p>
-              </Like>
+              </LikedInfo>
             </div>
             <p>
               It is a long established fact that a reader will be distracted by
@@ -76,7 +80,7 @@ const Applications: React.FC = () => {
             </p>
           </Main>
           <hr />
-          <div>
+          <Description>
             <h1>Descrição</h1>
             <p>
               It is a long established fact that a reader will be distracted by
@@ -90,13 +94,21 @@ const Applications: React.FC = () => {
               have evolved over the years, sometimes by accident, sometimes on
               purpose (injected humour and the like).
             </p>
-          </div>
+          </Description>
           <Gallery>
             <img src="https://dummyimage.com/400x400/d134d1/ffffff" alt="" />
             <img src="https://dummyimage.com/400x400/d134d1/ffffff" alt="" />
             <img src="https://dummyimage.com/400x400/d134d1/ffffff" alt="" />
           </Gallery>
         </Project>
+        <FixedButtons>
+          <Button type="button" typeButton="download">
+            <FiDownload size={25} />
+          </Button>
+          <Button type="button" typeButton="like">
+            <FiHeart size={25} />
+          </Button>
+        </FixedButtons>
       </Container>
     </>
   );
