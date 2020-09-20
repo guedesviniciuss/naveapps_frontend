@@ -37,6 +37,7 @@ export const TableContainer = styled.section`
       }
       button {
         width: 42px;
+        margin: 5px;
         height: 28px;
         justify-content: center;
         border: 0px;

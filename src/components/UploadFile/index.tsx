@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { DropzoneArea } from 'material-ui-dropzone';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -7,9 +7,10 @@ const styles = {
     display: 'flex',
     backgroundColor: 'transparent !important',
     boxShadow: 'none',
+    fontFamily: 'Poppins,sans-serif',
     paddingTop: '25px',
     margin: '25px 0px',
-    color: '#FFFFFF',
+    color: '#9197a9',
     justifyContent: 'center',
     alignItems: 'center',
     alignContent: 'center',
@@ -22,21 +23,7 @@ const Dropzone: React.FC = () => {
   );
   return (
     <form>
-      <DropzoneArea
-        dropzoneText={signedDocumentName}
-        getFileAddedMessage={
-          (fileName: string) => `Documento ${fileName} adicionado com sucesso.`
-          // eslint-disable-next-line react/jsx-curly-newline
-        }
-        getFileRemovedMessage={(fileName: string) =>
-          // eslint-disable-next-line prettier/prettier
-          `Documento ${fileName} removido com sucesso.`}
-        getFileLimitExceedMessage={(fileName: number) =>
-          // eslint-disable-next-line prettier/prettier
-          `O documento ${fileName} atingiu o limite permitido.`}
-        filesLimit={1}
-        acceptedFiles={['.jpg', '.png']}
-      />
+      <DropzoneArea />
     </form>
   );
 };

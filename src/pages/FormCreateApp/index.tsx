@@ -15,7 +15,11 @@ const FormCreateApp: React.FC = () => {
           <form>
             <Title>Cadastre seu aplicativo</Title>
             <div>
-              <Dropzone />
+              <Dropzone
+                dropzoneText="Coloque as imagens aqui"
+                filesLimit={5}
+                acceptedFiles={['.jpg', '.png']}
+              />
             </div>
 
             <input type="text" id="Nome" placeholder="Nome" />
@@ -25,9 +29,7 @@ const FormCreateApp: React.FC = () => {
               placeholder="Descricao"
               rows={4}
               cols={20}
-            >
-              asdasdaas
-            </textarea>
+            />
             <button type="submit">Enviar</button>
           </form>
         </Content>
