@@ -74,7 +74,6 @@ export const Projects = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-content: center;
-  justify-content: center;
 
   h1 {
     margin: 50px;
@@ -88,12 +87,10 @@ export const Projects = styled.div`
     border-radius: 5px;
     width: 45%;
     padding: 24px;
-    /* display: block; */
     text-decoration: none;
 
     display: flex;
-    /* flex: 1; */
-    align-items: center;
+
     transition: transform 0.5s;
 
     /* excluir */

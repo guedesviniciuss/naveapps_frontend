@@ -2,7 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { FaHeart } from 'react-icons/fa';
 
-import { Container, Header, Partners, Project } from './styles';
+import {
+  Container,
+  Partners,
+  Main,
+  Hero,
+  Project,
+  Title,
+  Like,
+  Gallery,
+} from './styles';
 import logo from '../../assets/naveapps.svg';
 import logoNave from '../../assets/logo_nave.png';
 import logoOiFuturo from '../../assets/logo_oi_futuro.png';
@@ -41,30 +50,34 @@ const Applications: React.FC = () => {
   return (
     <>
       <Container>
-        <Header>
-          <Partners>
-            <img src={logo} alt="NaveApps Logo" />
-            <div>
-              <img src={logoNave} alt="NAVE" />
-              <img src={logoOiFuturo} alt="Oi Futuro" />
-            </div>
-          </Partners>
-        </Header>
-        <Project>
-          <img src={`http://localhost:3333/${project?.thumbnail}`} alt="" />
-          <strong>aplicativo</strong>
-          <h2>Apocadino</h2>
-          <p>
-            It is a long established fact that a reader will be distracted by
-            the readable content of a page when looking at its layout. The point
-            of using Lorem Ipsum is that it has a more-or-less normal
-            distribution of
-          </p>
+        <p>Voltar</p>
+        <Partners>
+          <img src={logo} alt="NaveApps Logo" />
           <div>
-            <FaHeart size={15} />
-            <p>{project?.likes}</p>
+            <img src={logoNave} alt="NAVE" />
+            <img src={logoOiFuturo} alt="Oi Futuro" />
           </div>
+        </Partners>
+        <Project>
+          <Hero />
+          <Main>
+            <div>
+              <Title>Apocadino</Title>
+              <Like>
+                <FaHeart size={15} />
+                <p>{project?.likes}</p>
+              </Like>
+            </div>
+            <p>
+              It is a long established fact that a reader will be distracted by
+              the readable content of a page when looking at its layout. The
+              point of using Lorem Ipsum is that it has a more-or-less normal
+              distribution of
+            </p>
+          </Main>
+          <hr />
           <div>
+            <h1>Descrição</h1>
             <p>
               It is a long established fact that a reader will be distracted by
               the readable content of a page when looking at its layout. The
@@ -78,11 +91,11 @@ const Applications: React.FC = () => {
               purpose (injected humour and the like).
             </p>
           </div>
-          <div>
+          <Gallery>
             <img src="https://dummyimage.com/400x400/d134d1/ffffff" alt="" />
             <img src="https://dummyimage.com/400x400/d134d1/ffffff" alt="" />
             <img src="https://dummyimage.com/400x400/d134d1/ffffff" alt="" />
-          </div>
+          </Gallery>
         </Project>
       </Container>
     </>
