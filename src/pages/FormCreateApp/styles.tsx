@@ -69,6 +69,8 @@ export const Content = styled.div`
       border-radius: 5px;
       color: #3a3a3a;
 
+      padding: 0 24px;
+
       margin-top: 20px;
 
       &::placeholder {

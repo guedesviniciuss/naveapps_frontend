@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useRouteMatch } from 'react-router-dom';
+import { useRouteMatch, Link } from 'react-router-dom';
 import { FaHeart } from 'react-icons/fa';
-import { FiHeart, FiDownload } from 'react-icons/fi';
+import { FiHeart, FiDownload, FiChevronLeft } from 'react-icons/fi';
 
 import {
   Container,
-  Partners,
+  Header,
   Main,
   Hero,
   Project,
@@ -16,9 +16,8 @@ import {
   Gallery,
   Description,
 } from './styles';
+
 import logo from '../../assets/naveapps.svg';
-import logoNave from '../../assets/logo_nave.png';
-import logoOiFuturo from '../../assets/logo_oi_futuro.png';
 
 import api from '../../services/api';
 
@@ -58,14 +57,13 @@ const Applications: React.FC = () => {
   return (
     <>
       <Container>
-        <p>Voltar</p>
-        <Partners>
-          <img src={logo} alt="NaveApps Logo" />
-          <div>
-            <img src={logoNave} alt="NAVE" />
-            <img src={logoOiFuturo} alt="Oi Futuro" />
-          </div>
-        </Partners>
+        <Header>
+          <Link to='/'>
+            <FiChevronLeft />
+            <span>Voltar</span>
+          </Link>
+            <img src={logo} alt="NaveApps Logo" />
+        </Header>
         {!application ? null : (
           <Project>
             <Hero />

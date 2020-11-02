@@ -7,13 +7,15 @@ import {
 import Header from '../../components/Header';
 import api from '../../services/api';
 
+import getUserType from '../../utils/getUserType';
+
 import { Container, TableContainer } from './styles';
 
 interface User {
   id: string;
   name: string;
-  email: string; // tratar como Date
-  permission: string; // tratar como Date
+  email: string;
+  user_profile: number;
 }
 
 const UserDashboard: React.FC = () => {
@@ -25,7 +27,7 @@ const UserDashboard: React.FC = () => {
         headers: {
           Authorization:
             'Bearer ' +
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemF0aW9uIjoxMDI0LCJpYXQiOjE2MDA2MjIyMjMsImV4cCI6MTYwMDcwODYyMywic3ViIjoiZWY4Mjc4ZDUtMWFhYi00ZWE4LTkyMDQtMmYwNDM2MjU3NTI4In0.WkcQlGakpPFFP-MBUQKd2ULauJXx5P2Z6QB5wQ0Bvlw',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemF0aW9uIjoyMDQ4LCJpYXQiOjE2MDQzNDMyNjAsImV4cCI6MTYwNDQyOTY2MCwic3ViIjoiNzg4Y2YyZTctZWVjMC00ZDM4LWE3MGItMzZmNjBiOGE5ZjFlIn0.rTMUAVBkA8hXWoXdHsvyd2yr-lV9D0pobepyoxhD_1s',
         },
       });
       setUsers([...users, ...response.data]);
@@ -39,7 +41,6 @@ const UserDashboard: React.FC = () => {
 
     console.log(application.data);
 
-    // temos um array e queremos remover um elemento de dentro desse array
     const usersUpdated = users.filter(p => p.id !== id);
     setUsers([...usersUpdated]);
 
@@ -57,7 +58,8 @@ const UserDashboard: React.FC = () => {
                 <th>Nome</th>
                 <th>E-Mail</th>
                 <th>Tipo</th>
-                <th>Ações</th>
+                <th>Editar</th>
+                <th>Remover</th>
               </tr>
             </thead>
 
@@ -66,13 +68,15 @@ const UserDashboard: React.FC = () => {
                 <tr key={user.id}>
                   <td>{user.name}</td>
                   <td>{user.email}</td>
-                  <td>{user.permission}</td>
+                  <td>{getUserType(user.user_profile)}</td>
+                  <td>
+                    <button type="button">
+                      <EditIcon size={20} />
+                    </button>
+                  </td>
                   <td>
                     <button type="button" onClick={() => handleDelete(user.id)}>
                       <DeleteIcon size={20} />
-                    </button>
-                    <button type="button">
-                      <EditIcon size={20} />
                     </button>
                   </td>
                 </tr>

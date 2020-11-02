@@ -50,7 +50,8 @@ const Dashboard: React.FC = () => {
                 <th>Título</th>
                 <th>Criado</th>
                 <th>Atualizado</th>
-                <th>Ações</th>
+                <th>Editar</th>
+                <th>Remover</th>
               </tr>
             </thead>
 
@@ -61,11 +62,13 @@ const Dashboard: React.FC = () => {
                   <td>{dateConverter(project.created_at)}</td>
                   <td>{dateConverter(project.updated_at)}</td>
                   <td>
-                    <button onClick={() => handleDelete(project.id)}>
-                      <DeleteIcon size={20} />
-                    </button>
                     <button>
                       <UpdateIcon size={20} />
+                    </button>
+                  </td>
+                  <td>
+                    <button onClick={() => handleDelete(project.id)}>
+                      <DeleteIcon size={20} />
                     </button>
                   </td>
                 </tr>

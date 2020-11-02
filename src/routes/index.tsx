@@ -9,6 +9,8 @@ import Management from '../pages/Management';
 import FormCreateApp from '../pages/FormCreateApp';
 import UserDashboard from '../pages/Users';
 
+// import Route from './Route';
+
 const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={Dashboard} />

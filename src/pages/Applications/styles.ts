@@ -5,29 +5,40 @@ interface ButtonProps {
 }
 
 export const Container = styled.div`
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
 `;
 
-export const Partners = styled.div`
+export const Header = styled.div`
   width: 100%;
-  padding: 30px 20px;
+  padding: 50px 50px;
 
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
 
   img {
-    width: 300px;
+      width: 200px;
   }
 
-  div {
-    img {
-      width: 64px;
+  a {
+    display: flex;
+    align-items: center;
+    color: #afafaf;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s;
 
-      & + img {
-        margin-left: 10px;
-      }
+    span {
+      font-size: 20px;
+    }
+
+    svg {
+      font-size: 25px;
+    }
+
+    &:hover {
+      color: #7c7c7c;
     }
   }
 `;

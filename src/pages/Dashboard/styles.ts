@@ -70,10 +70,11 @@ export const Form = styled.form`
 export const Projects = styled.div`
   margin-top: 80px;
   max-width: 1200px;
+  height: 90vh;
 
   display: flex;
   flex-wrap: wrap;
-  align-content: center;
+  align-content: flex-start;
 
   h1 {
     margin: 50px;

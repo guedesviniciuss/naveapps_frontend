@@ -1,24 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import logo from '../../assets/symbol_naveapps.svg';
-import logoNave from '../../assets/logo_nave.png';
-import logoOiFuturo from '../../assets/logo_oi_futuro.png';
+import {
+  FiUser,
+  FiList,
+} from 'react-icons/fi';
+
+import logo from '../../assets/naveapps.svg';
 import { MainHeader } from './styles';
 
 const Header: React.FC = () => (
   <>
     <MainHeader>
       <div>
+        <img src={logo} alt="lal1" />
         <ul>
           <li>
-            <Link to="/users">Usuários</Link>
+            <FiUser />
+            <Link to="/users">Gerenciar Usuários</Link>
           </li>
           <li>
-            <Link to="/management">Aplicações</Link>
+            <FiList />
+            <Link to="/management">Gerenciar Aplicações</Link>
           </li>
         </ul>
-        <img src={logo} alt="lal1" />
         <strong>Sair</strong>
       </div>
     </MainHeader>
