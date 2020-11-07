@@ -2,14 +2,16 @@ import React, { useState, useEffect, MouseEvent } from 'react';
 import {
   FaTrashAlt as DeleteIcon,
   FaPencilAlt as EditIcon,
+  FaUser,
 } from 'react-icons/fa';
 
 import Header from '../../components/Header';
+
 import api from '../../services/api';
 
 import getUserType from '../../utils/getUserType';
 
-import { Container, TableContainer } from './styles';
+import { Container, Hero, TableContainer } from './styles';
 
 interface User {
   id: string;
@@ -51,6 +53,15 @@ const UserDashboard: React.FC = () => {
     <>
       <Header />
       <Container>
+        <Hero>
+          <h1>
+            Gerencie aqui os <b>seus usuários</b>
+          </h1>
+          <button type="button">
+            <FaUser />
+            Criar Usuário
+          </button>
+        </Hero>
         <TableContainer>
           <table>
             <thead>

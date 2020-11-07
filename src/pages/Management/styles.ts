@@ -1,11 +1,53 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { shade } from 'polished';
+
+interface ButtonProps {
+  edit: boolean;
+  remove: boolean;
+}
 
 export const Container = styled.div`
   width: 100%;
   max-width: 1120px;
   margin: 0 auto;
   padding: 40px 20px;
+`;
+
+export const Hero = styled.div`
+  display: flex;
+  margin: 20px 0;
+
+  h1 {
+    color: #b8b8b8;
+    flex: 1;
+
+    b {
+      color: #69bdc5;
+    }
+  }
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #04d361;
+    color: #fff;
+
+    width: 200px;
+    border-radius: 5px;
+    border: 0;
+
+    transition: background-color 0.2s;
+
+    svg {
+      margin-right: 5px;
+    }
+
+    &:hover {
+      background: ${shade(0.1, '#04d361')};
+    }
+  }
 `;
 
 export const TableContainer = styled.section`
@@ -35,28 +77,6 @@ export const TableContainer = styled.section`
       &.title {
         color: #363f5f;
       }
-
-      button {
-        width: 42px;
-        height: 28px;
-        justify-content: center;
-        border: 0px;
-        border-radius: 5px 5px 5px 5px;
-        color: #fff;
-        font-weight: bold;
-        transition: background-color 0.2s;
-        background: none;
-        color: inherit;
-
-        svg {
-          display: inline-block;
-          vertical-align: middle;
-        }
-
-        &:hover {
-            color: ${shade(0.1, '#04d361')};
-        }
-      }
     }
 
     td:first-child {
@@ -68,3 +88,39 @@ export const TableContainer = styled.section`
     }
   }
 `;
+
+export const Button = styled.button`
+  width: 42px;
+  height: 28px;
+  justify-content: center;
+  border: 0px;
+  border-radius: 5px 5px 5px 5px;
+  color: #fff;
+
+  font-weight: bold;
+  transition: background-color 0.2s;
+  background: none;
+  color: inherit;
+
+  svg {
+    display: inline-block;
+    vertical-align: middle;
+  }
+`;
+
+/**
+ *
+  ${props =>
+    props.remove &&
+    css`
+      border-color: #c53030;
+    `}
+
+  ${props =>
+    props.edit &&
+    css`
+      border-color: #79dbd9;
+      color: #79dbd9;
+    `}
+ *
+ */

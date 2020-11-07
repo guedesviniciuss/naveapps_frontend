@@ -6,7 +6,6 @@ import Applications from '../pages/Applications';
 import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
 import Management from '../pages/Management';
-import FormCreateApp from '../pages/FormCreateApp';
 import UserDashboard from '../pages/Users';
 
 // import Route from './Route';
@@ -16,10 +15,9 @@ const Routes: React.FC = () => (
     <Route path="/" exact component={Dashboard} />
     <Route path="/projects/:project+" component={Applications} />
     <Route path="/login" component={Login} />
-    <Route path="/signup" component={SignUp} />
-    <Route path="/management" component={Management} />
-    <Route path="/createapp" component={FormCreateApp} />
-    <Route path="/users" component={UserDashboard} />
+    <Route path="/signup" isPrivate component={SignUp} />
+    <Route path="/management" isPrivate component={Management} />
+    <Route path="/users" isPrivate component={UserDashboard} />
   </Switch>
 );
 

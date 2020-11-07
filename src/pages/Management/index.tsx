@@ -1,10 +1,14 @@
 import React, { useState, useEffect, MouseEvent } from 'react';
-import { FaTrashAlt as DeleteIcon, FaUndo as UpdateIcon } from 'react-icons/fa';
+import {
+  FaTrashAlt as DeleteIcon,
+  FaUndo as UpdateIcon,
+  FaPlus,
+} from 'react-icons/fa';
 
 import Header from '../../components/Header';
 import api from '../../services/api';
 
-import { Container, TableContainer } from './styles';
+import { Container, Hero, TableContainer, Button } from './styles';
 
 import dateConverter from '../../utils/dateConverter';
 
@@ -32,17 +36,23 @@ const Dashboard: React.FC = () => {
 
     console.log(application.data);
 
-    // temos um array e queremos remover um elemento de dentro desse array
     const projectsUpdated = projects.filter(p => p.id !== id);
     setProjects([...projectsUpdated]);
-
-    console.log(id);
   }
 
   return (
     <>
       <Header />
       <Container>
+        <Hero>
+          <h1>
+            Gerencie aqui as <b>suas aplicações</b>
+          </h1>
+          <button type="button">
+            <FaPlus />
+            Criar Aplicação
+          </button>
+        </Hero>
         <TableContainer>
           <table>
             <thead>
@@ -62,14 +72,14 @@ const Dashboard: React.FC = () => {
                   <td>{dateConverter(project.created_at)}</td>
                   <td>{dateConverter(project.updated_at)}</td>
                   <td>
-                    <button>
+                    <Button>
                       <UpdateIcon size={20} />
-                    </button>
+                    </Button>
                   </td>
                   <td>
-                    <button onClick={() => handleDelete(project.id)}>
+                    <Button onClick={() => handleDelete(project.id)}>
                       <DeleteIcon size={20} />
-                    </button>
+                    </Button>
                   </td>
                 </tr>
               ))}

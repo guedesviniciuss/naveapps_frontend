@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
 
-export const Container = styled.div`
-  height: 100vh;
-  display: flex;
-  align-items: stretch;
-`;
 export const Title = styled.h1`
   font-size: calc(0.4vw + 0.7vh + 2.2vmin);
 `;

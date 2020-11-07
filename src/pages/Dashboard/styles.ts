@@ -30,6 +30,12 @@ export const Partners = styled.div`
       }
     }
   }
+
+  @media (max-width: 600px) {
+    div {
+      display: none;
+    }
+  }
 `;
 
 export const Form = styled.form`
@@ -152,6 +158,14 @@ export const Projects = styled.div`
     svg {
       margin-left: auto;
       color: #cbcbcb;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    a {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
     }
   }
 `;

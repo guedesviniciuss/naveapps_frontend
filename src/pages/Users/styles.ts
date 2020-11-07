@@ -8,6 +8,42 @@ export const Container = styled.div`
   padding: 40px 20px;
 `;
 
+export const Hero = styled.div`
+  display: flex;
+  margin: 20px 0;
+
+  h1 {
+    color: #b8b8b8;
+    flex: 1;
+
+    b {
+      color: #69bdc5;
+    }
+  }
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #04d361;
+    color: #fff;
+    width: 200px;
+    border-radius: 5px;
+    border: 0;
+
+    transition: background-color 0.2s;
+
+    svg {
+      margin-right: 5px;
+    }
+
+    &:hover {
+      background: ${shade(0.1, '#04d361')};
+    }
+  }
+`;
+
 export const TableContainer = styled.section`
   margin-top: 64px;
 
