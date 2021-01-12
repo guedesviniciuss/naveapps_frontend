@@ -1,5 +1,17 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { shade } from 'polished';
+
+const appearFromDown = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+`;
 
 export const Container = styled.div`
   height: 100vh;
@@ -7,16 +19,15 @@ export const Container = styled.div`
   align-items: stretch;
 `;
 
-export const Content = styled.div`
+export const AnimationContainer = styled.div`
   display: flex;
   flex: 1;
 
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
 
-  border-radius: 10px;
+  animation: ${appearFromDown} 1s;
 
   img {
     width: 300px;
@@ -61,4 +72,16 @@ export const Content = styled.div`
       }
     }
   }
+`;
+
+export const Content = styled.div`
+  display: flex;
+  flex: 1;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  border-radius: 10px;
 `;

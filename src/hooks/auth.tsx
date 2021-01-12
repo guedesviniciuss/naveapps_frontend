@@ -1,10 +1,5 @@
-import React, { createContext, useCallback, useState, useContext } from 'react';
+import React, { createContext, useCallback, useContext, useState } from 'react';
 import api from '../services/api';
-
-interface AuthContext {
-  token: string;
-  user: object;
-}
 
 interface AuthContextData {
   user: object;
@@ -17,38 +12,43 @@ interface SignInCredentials {
   password: string;
 }
 
+interface AuthData {
+  token: string;
+  user: object;
+}
+
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider: React.FC = ({ children }) => {
-  const [data, setData] = useState<AuthContext>(() => {
-    const token = localStorage.getItem('@Naveapps/token');
-    const user = localStorage.getItem('@Naveapps/user');
+  const [data, setData] = useState<AuthData>(() => {
+    const token = localStorage.getItem('Naveapps:token');
+    const user = localStorage.getItem('Naveapps:user');
 
-    if (user && token) {
-      return { user: JSON.parse(user), token };
+    if (token && user) {
+      return { token, user: JSON.parse(user) };
     }
 
-    return {} as AuthContext;
+    return {} as AuthData;
   });
 
   const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
-    const response = await api.post('/sessions', {
+    const response = await api.post('sessions', {
       email,
       password,
     });
+
     const { user, token } = response.data;
 
-    localStorage.setItem('@Naveapps/token', token);
-    localStorage.setItem('@Naveapps/user', JSON.stringify(user));
+    localStorage.setItem('Naveapps:user', JSON.stringify(user));
+    localStorage.setItem('Naveapps:token', token);
 
     setData({ user, token });
   }, []);
 
   const signOut = useCallback(() => {
-    localStorage.removeItem('@Naveapps/token');
-    localStorage.removeItem('@Naveapps/user');
-
-    setData({} as AuthContext);
+    localStorage.removeItem('Naveapps:token');
+    localStorage.removeItem('Naveapps:user');
+    setData({} as AuthData);
   }, []);
 
   return (
@@ -61,9 +61,7 @@ const AuthProvider: React.FC = ({ children }) => {
 function useAuth(): AuthContextData {
   const context = useContext(AuthContext);
 
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
+  if (!context) throw new Error('useToast must be use within an ToastProvider');
 
   return context;
 }

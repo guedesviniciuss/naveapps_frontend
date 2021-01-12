@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import { FiUser, FiMail, FiLock, FiChevronLeft } from 'react-icons/fi';
-import { Container, Content } from './styles';
+import { Container, Content, AnimationContainer } from './styles';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 
@@ -38,35 +38,37 @@ const SignUp: React.FC = () => {
   return (
     <Container>
       <Content>
-        <img src={logo} alt="" />
-        <Form ref={formRef} onSubmit={handleSubmit}>
-          <Input
-            name="name"
-            type="name"
-            icon={FiUser}
-            id="name"
-            placeholder="Nome de usuário"
-          />
-          <Input
-            name="email"
-            type="text"
-            icon={FiMail}
-            id="email"
-            placeholder="E-mail"
-          />
-          <Input
-            name="password"
-            type="password"
-            icon={FiLock}
-            id="password"
-            placeholder="Senha"
-          />
-          <Button type="submit">Solicitar Criação</Button>
-        </Form>
-        <Link to="/login">
-          <FiChevronLeft size={30} />
-          Voltar para o login
-        </Link>
+        <AnimationContainer>
+          <img src={logo} alt="" />
+          <Form ref={formRef} onSubmit={handleSubmit}>
+            <Input
+              name="name"
+              type="name"
+              icon={FiUser}
+              id="name"
+              placeholder="Nome de usuário"
+            />
+            <Input
+              name="email"
+              type="text"
+              icon={FiMail}
+              id="email"
+              placeholder="E-mail"
+            />
+            <Input
+              name="password"
+              type="password"
+              icon={FiLock}
+              id="password"
+              placeholder="Senha"
+            />
+            <Button type="submit">Solicitar Criação</Button>
+          </Form>
+          <Link to="/login">
+            <FiChevronLeft size={30} />
+            Voltar para o login
+          </Link>
+        </AnimationContainer>
       </Content>
     </Container>
   );

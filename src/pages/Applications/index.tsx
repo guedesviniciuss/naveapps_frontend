@@ -28,6 +28,7 @@ interface Project {
   description: string;
   thumbnail: string;
   likes: number;
+  gallery: string[];
 }
 
 interface ProjectParams {
@@ -53,16 +54,17 @@ const Applications: React.FC = () => {
   async function handleLikeApp(id: string): Promise<void> {
     await api.post(`/applications/likes/${id}`);
   }
+  console.log(application);
 
   return (
     <>
       <Container>
         <Header>
-          <Link to='/'>
+          <Link to="/">
             <FiChevronLeft />
             <span>Voltar</span>
           </Link>
-            <img src={logo} alt="NaveApps Logo" />
+          <img src={logo} alt="NaveApps Logo" />
         </Header>
         {!application ? null : (
           <Project>
@@ -83,9 +85,9 @@ const Applications: React.FC = () => {
               <p>{application.description}</p>
             </Description>
             <Gallery>
-              <img src="https://dummyimage.com/400x400/d134d1/ffffff" alt="" />
-              <img src="https://dummyimage.com/400x400/d134d1/ffffff" alt="" />
-              <img src="https://dummyimage.com/400x400/d134d1/ffffff" alt="" />
+              {application.gallery.map(image => (
+                <img src={`http://localhost:3333/${image}`} alt="" />
+              ))}
             </Gallery>
             <FixedButtons>
               <Button type="button" typeButton="download">
