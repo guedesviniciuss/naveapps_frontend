@@ -10967,6 +10967,16 @@ react-dropzone@^10.2.1:
     file-selector "^0.1.12"
     prop-types "^15.7.2"
 
+react-elastic-carousel@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/react-elastic-carousel/-/react-elastic-carousel-0.11.0.tgz#add016ba969072860edf348dd0afccf6adf70485"
+  integrity sha512-Z8PpJcnWeVZkf5K8CNHE63hQrStgF12MiYiEFEtFSkcyTk4msoOI19fkbIGCbNp92sOuDFJTLsI1rEK5J3gA1A==
+  dependencies:
+    classnames "^2.2.6"
+    react-only-when "^1.0.2"
+    react-swipeable "^5.5.1"
+    resize-observer-polyfill "1.5.0"
+
 react-error-overlay@^6.0.7:
   version "6.0.7"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.7.tgz#1dcfb459ab671d53f660a991513cb2f0a0553108"
@@ -10988,6 +10998,11 @@ react-is@^16.8.1, react-is@^16.8.4:
   version "16.12.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
   integrity sha512-rPCkf/mWBtKc97aLL9/txD8DZdemK0vkA3JMLShjlJB3Pj3s+lpf1KaBzMfQrAmhMQB0n1cU/SUGgKKBCe837Q==
+
+react-only-when@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-only-when/-/react-only-when-1.0.2.tgz#a8a79b48dd6cfbd91ddc710674a94153e88039d3"
+  integrity sha512-agE6l3L6bqaVuwNtjihTQ36M+VBfPS63KOzcNL4ZTmlwSxQPvhzIqmBWfiol0/wLYmKxCcBqgXkEJpvj5Kob8Q==
 
 react-router-dom@^5.2.0:
   version "5.2.0"
@@ -11085,6 +11100,13 @@ react-spring@^8.0.27:
   dependencies:
     "@babel/runtime" "^7.3.1"
     prop-types "^15.5.8"
+
+react-swipeable@^5.5.1:
+  version "5.5.1"
+  resolved "https://registry.yarnpkg.com/react-swipeable/-/react-swipeable-5.5.1.tgz#48ae6182deaf62f21d4b87469b60281dbd7c4a76"
+  integrity sha512-EQObuU3Qg3JdX3WxOn5reZvOSCpU4fwpUAs+NlXSN3y+qtsO2r8VGkVnOQzmByt3BSYj9EWYdUOUfi7vaMdZZw==
+  dependencies:
+    prop-types "^15.6.2"
 
 react-transition-group@^4.4.0:
   version "4.4.1"
@@ -11432,6 +11454,11 @@ requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
+
+resize-observer-polyfill@1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.0.tgz#660ff1d9712a2382baa2cad450a4716209f9ca69"
+  integrity sha512-M2AelyJDVR/oLnToJLtuDJRBBWUGUvvGigj1411hXhAdyFWqMaqHp7TixW3FpiLuVaikIcR1QL+zqoJoZlOgpg==
 
 resize-observer-polyfill@^1.5.0, resize-observer-polyfill@^1.5.1:
   version "1.5.1"

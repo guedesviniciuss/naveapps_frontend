@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 interface AnchorProps {
   typeButton: 'like' | 'download' | 'info';
+  likeAware?: boolean;
 }
 
 export const Container = styled.div`
@@ -166,5 +167,20 @@ export const Button = styled.a<AnchorProps>`
       `};
 
     transform: translateY(-5px);
+
+    ${props =>
+      props?.likeAware &&
+      css`
+        transition: none;
+        transform: none;
+      `};
   }
+
+  ${props =>
+    props?.likeAware &&
+    css`
+      background: #c53030;
+      transition: none;
+      transform: none;
+    `};
 `;
