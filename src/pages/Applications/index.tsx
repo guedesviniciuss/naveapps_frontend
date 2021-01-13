@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useRouteMatch, Link } from 'react-router-dom';
 import { FaHeart } from 'react-icons/fa';
 import { FiHeart, FiDownload, FiChevronLeft } from 'react-icons/fi';
+import Carousel from 'react-elastic-carousel';
 
 import {
   Container,
@@ -41,6 +42,8 @@ interface ProjectParams {
 const Applications: React.FC = () => {
   const [application, setApplication] = useState<Project>({} as Project);
 
+  const [hasLiked, setHasLiked] = useState(false);
+
   const { params: projectParams } = useRouteMatch<ProjectParams>();
   useEffect(() => {
     async function getApiProject(): Promise<void> {
@@ -49,14 +52,22 @@ const Applications: React.FC = () => {
       );
       setApplication({ ...response.data });
       console.log(response.data);
+      console.log(application.id);
+      if (localStorage.getItem(response.data.id) !== null) {
+        setHasLiked(() => true);
+      }
     }
     getApiProject();
   }, [projectParams.project]);
 
   const handleLikeApp = useCallback(
     async (id: string): Promise<void> => {
-      await api.post<Project>(`/applications/likes/${id}`);
-      setApplication({ ...application, likes: application.likes + 1 });
+      if (localStorage.getItem(id) === null) {
+        await api.post<Project>(`/applications/likes/${id}`);
+        setApplication({ ...application, likes: application.likes + 1 });
+        localStorage.setItem(id, 'Liked');
+        setHasLiked(() => true);
+      }
     },
     [application],
   );
@@ -89,11 +100,11 @@ const Applications: React.FC = () => {
               <h1>Descrição</h1>
               <p>{application.description}</p>
             </Description>
-            <Gallery>
+            <Carousel isRTL={false}>
               {application.gallery?.map(image => (
                 <img src={`http://localhost:3333/${image}`} alt="" />
               ))}
-            </Gallery>
+            </Carousel>
             <iframe
               title={application.id}
               width="100%"
@@ -114,6 +125,7 @@ const Applications: React.FC = () => {
               <Button
                 type="button"
                 typeButton="like"
+                likeAware={hasLiked}
                 onClick={() => handleLikeApp(application.id)}
               >
                 <FiHeart size={25} />
