@@ -1,4 +1,4 @@
-import React, { useState, useEffect, MouseEvent } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   FaTrashAlt as DeleteIcon,
   FaPencilAlt as EditIcon,
@@ -37,6 +37,21 @@ const UserDashboard: React.FC = () => {
 
     getApiUsers();
   }, []);
+
+  const dataSource = [
+    {
+      key: '1',
+      name: 'Mike',
+      age: 32,
+      address: '10 Downing Street',
+    },
+    {
+      key: '2',
+      name: 'John',
+      age: 42,
+      address: '10 Downing Street',
+    },
+  ];
 
   async function handleDelete(id: string): Promise<void> {
     const application = await api.delete(`/users/${id}`);

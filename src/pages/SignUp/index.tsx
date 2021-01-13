@@ -65,7 +65,7 @@ const SignUp: React.FC = () => {
             <Button type="submit">Solicitar Criação</Button>
           </Form>
           <Link to="/login">
-            <FiChevronLeft size={30} />
+            <FiChevronLeft />
             Voltar para o login
           </Link>
         </AnimationContainer>

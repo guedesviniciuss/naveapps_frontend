@@ -14,6 +14,7 @@ export const Container = styled.div<ContainerProps>`
   padding: 16px;
   width: 100%;
 
+
   border: 2px solid #fff;
   color: #ccd2e4;
 
@@ -56,7 +57,7 @@ export const Container = styled.div<ContainerProps>`
     }
   }
 
-  svg {
+  > svg {
     margin-right: 16px;
   }
 `;
@@ -64,7 +65,7 @@ export const Container = styled.div<ContainerProps>`
 export const Error = styled(Tooltip)`
   height: 20px;
   margin-left: 16px;
-  svg {
+  > svg {
     margin: 0;
   }
 

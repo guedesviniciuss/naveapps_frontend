@@ -8,10 +8,10 @@ export const MainHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
   div {
     padding: 0px 30px;
     display: flex;
-    /* justify-content: space-between; */
     align-items: center;
     width: 100%;
     max-width: 1300px;
@@ -19,29 +19,45 @@ export const MainHeader = styled.div`
     ul {
       list-style-type: none;
       display: flex;
+      justify-content: space-around;
       flex: 1;
       padding: 0 50px;
 
       li {
         display: flex;
-        align-items: center;
         color: #fff;
 
         svg {
-          margin-right: 10px;
+          margin-right: 5px;
         }
 
         a {
           color: #fff;
           text-decoration: none;
+          transition: color 0.4s;
+          display: flex;
+          align-items: center;
 
-        &:hover {
-          color: ${shade(0.4, '#fff')};
+          &:hover {
+            color: ${shade(0.2, '#fff')};
+          }
         }
-      }
+
+        button {
+          display: flex;
+          align-items: center;
+          color: #fff;
+          background: none;
+          border: 0;
+          transition: color 0.2s;
+
+          &:hover {
+            color: ${shade(0.2, '#fff')};
+          }
+        }
 
         &:hover {
-          color: ${shade(0.4, '#fff')};
+          color: ${shade(0.2, '#fff')};
         }
       }
 
@@ -53,14 +69,5 @@ export const MainHeader = styled.div`
     img {
       width: 200px;
     }
-  }
-
-  strong {
-    color: #fff;
-    cursor: pointer;
-
-    &:hover {
-          color: ${shade(0.4, '#fff')};
-        }
   }
 `;

@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import api from '../services/api';
 
 interface AuthContextData {
@@ -31,6 +32,8 @@ const AuthProvider: React.FC = ({ children }) => {
     return {} as AuthData;
   });
 
+  const history = useHistory();
+
   const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
     const response = await api.post('sessions', {
       email,
@@ -46,8 +49,10 @@ const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   const signOut = useCallback(() => {
+    console.log('entrou');
     localStorage.removeItem('Naveapps:token');
     localStorage.removeItem('Naveapps:user');
+    history.push('/login');
     setData({} as AuthData);
   }, []);
 

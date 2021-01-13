@@ -3,7 +3,6 @@ import { shade } from 'polished';
 
 export const Title = styled.h1`
   font-size: 48px;
-
   color: #fff;
   line-height: 56px;
   margin-top: 60px;

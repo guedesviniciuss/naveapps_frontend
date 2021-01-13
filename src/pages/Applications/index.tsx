@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useRouteMatch, Link } from 'react-router-dom';
 import { FaHeart } from 'react-icons/fa';
 import { FiHeart, FiDownload, FiChevronLeft } from 'react-icons/fi';
@@ -15,6 +15,7 @@ import {
   FixedButtons,
   Gallery,
   Description,
+  Video,
 } from './styles';
 
 import logo from '../../assets/naveapps.svg';
@@ -25,7 +26,9 @@ interface Project {
   id: string;
   name: string;
   summary: string;
+  link: string;
   description: string;
+  video: string;
   thumbnail: string;
   likes: number;
   gallery: string[];
@@ -36,25 +39,27 @@ interface ProjectParams {
 }
 
 const Applications: React.FC = () => {
-  const [application, setApplication] = useState<Project | null>(null);
+  const [application, setApplication] = useState<Project>({} as Project);
 
   const { params: projectParams } = useRouteMatch<ProjectParams>();
-
   useEffect(() => {
     async function getApiProject(): Promise<void> {
       const response = await api.get<Project>(
         `/applications/${projectParams.project}`,
       );
-      console.log(response.data);
       setApplication({ ...response.data });
+      console.log(response.data);
     }
     getApiProject();
   }, [projectParams.project]);
 
-  async function handleLikeApp(id: string): Promise<void> {
-    await api.post(`/applications/likes/${id}`);
-  }
-  console.log(application);
+  const handleLikeApp = useCallback(
+    async (id: string): Promise<void> => {
+      await api.post<Project>(`/applications/likes/${id}`);
+      setApplication({ ...application, likes: application.likes + 1 });
+    },
+    [application],
+  );
 
   return (
     <>
@@ -85,12 +90,25 @@ const Applications: React.FC = () => {
               <p>{application.description}</p>
             </Description>
             <Gallery>
-              {application.gallery.map(image => (
+              {application.gallery?.map(image => (
                 <img src={`http://localhost:3333/${image}`} alt="" />
               ))}
             </Gallery>
+            <iframe
+              title={application.id}
+              width="100%"
+              height="500px"
+              src="https://www.youtube.com/embed/I3tANQpYomM?controls=0"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
             <FixedButtons>
-              <Button type="button" typeButton="download">
+              <Button
+                typeButton="download"
+                href={application.link}
+                target="_blank"
+              >
                 <FiDownload size={25} />
               </Button>
               <Button

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
-interface ButtonProps {
-  typeButton: 'like' | 'download';
+interface AnchorProps {
+  typeButton: 'like' | 'download' | 'info';
 }
 
 export const Container = styled.div`
@@ -18,7 +18,7 @@ export const Header = styled.div`
   align-items: flex-end;
 
   img {
-      width: 200px;
+    width: 200px;
   }
 
   a {
@@ -128,12 +128,16 @@ export const FixedButtons = styled.div`
   bottom: 30px;
   right: 50px;
 
-  button + button {
+  a + a {
     margin-top: 30px;
   }
 `;
 
-export const Button = styled.button<ButtonProps>`
+export const Video = styled.video`
+  width: 100%;
+`;
+
+export const Button = styled.a<AnchorProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -143,6 +147,7 @@ export const Button = styled.button<ButtonProps>`
   background: #bfbfbf;
   border: 0;
   color: #fff;
+  cursor: pointer;
 
   transition: background 0.4s;
   transition: transform 0.4s;
@@ -157,7 +162,7 @@ export const Button = styled.button<ButtonProps>`
     ${props =>
       props?.typeButton === 'download' &&
       css`
-        background: #7cd561;
+        background: #1d41f4;
       `};
 
     transform: translateY(-5px);

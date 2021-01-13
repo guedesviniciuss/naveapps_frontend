@@ -41,10 +41,11 @@ export const AnimationContainer = styled.div`
     text-decoration: none;
     font-weight: 700;
     display: block;
-    align-items: center;
-    justify-content: center;
     margin-top: 24px;
     transition: color 0ms.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     svg {
       margin-right: 10px;

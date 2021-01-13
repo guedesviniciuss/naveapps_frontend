@@ -21,13 +21,12 @@ interface Project {
 
 const Dashboard: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
-  // const [filteredProject, setFilteredProject] = useState([]);
   const [searchProject, setSearchProject] = useState('');
 
   useEffect(() => {
     async function getApiProjects(): Promise<void> {
       const response = await api.get<Project[]>('/applications');
-      setProjects([...projects, ...response.data]);
+      setProjects(state => [...state, ...response.data]);
     }
     getApiProjects();
   }, []);
