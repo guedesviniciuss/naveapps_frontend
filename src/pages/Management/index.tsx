@@ -24,7 +24,13 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     async function getApiProjects(): Promise<void> {
-      const response = await api.get<Project[]>('/applications');
+      const response = await api.get<Project[]>('/applications/proprietary', {
+        headers: {
+          Authorization:
+            'Bearer ' +
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemF0aW9uIjoyMDQ4LCJpYXQiOjE2MTA1MDI3NDYsImV4cCI6MTYxMDU4OTE0Niwic3ViIjoiMjlmMGM5YzktOTQxYS00ZmZhLWE0YmUtNjNlYzA2NTI5ZjUwIn0.97x404hsUuWeIz2_ka-lXpAnyXd_Qw7JybapnpOcoQQ',
+        },
+      });
       setProjects([...projects, ...response.data]);
     }
 
