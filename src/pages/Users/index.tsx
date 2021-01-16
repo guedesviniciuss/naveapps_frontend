@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   FaTrashAlt as DeleteIcon,
   FaPencilAlt as EditIcon,
@@ -6,6 +6,7 @@ import {
 } from 'react-icons/fa';
 
 import Header from '../../components/Header';
+import CreateUser from '../../components/CreateUser';
 
 import api from '../../services/api';
 
@@ -22,6 +23,7 @@ interface User {
 
 const UserDashboard: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
+  const [createUser, setCreateUser] = useState(false);
 
   useEffect(() => {
     async function getApiUsers(): Promise<void> {
@@ -64,53 +66,64 @@ const UserDashboard: React.FC = () => {
     console.log(id);
   }
 
+  const handleCreateUser = useCallback(() => {
+    setCreateUser(() => true);
+  }, []);
+
   return (
     <>
       <Header />
-      <Container>
-        <Hero>
-          <h1>
-            Gerencie aqui os <b>seus usuários</b>
-          </h1>
-          <button type="button">
-            <FaUser />
-            Criar Usuário
-          </button>
-        </Hero>
-        <TableContainer>
-          <table>
-            <thead>
-              <tr>
-                <th>Nome</th>
-                <th>E-Mail</th>
-                <th>Tipo</th>
-                <th>Editar</th>
-                <th>Remover</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {users?.map(user => (
-                <tr key={user.id}>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>{getUserType(user.user_profile)}</td>
-                  <td>
-                    <button type="button">
-                      <EditIcon size={20} />
-                    </button>
-                  </td>
-                  <td>
-                    <button type="button" onClick={() => handleDelete(user.id)}>
-                      <DeleteIcon size={20} />
-                    </button>
-                  </td>
+      {!createUser ? (
+        <Container>
+          <Hero>
+            <h1>
+              Gerencie aqui os <b>seus usuários</b>
+            </h1>
+            <button type="button" onClick={handleCreateUser}>
+              <FaUser />
+              Criar Usuário
+            </button>
+          </Hero>
+          <TableContainer>
+            <table>
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>E-Mail</th>
+                  <th>Tipo</th>
+                  <th>Editar</th>
+                  <th>Remover</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </TableContainer>
-      </Container>
+              </thead>
+
+              <tbody>
+                {users?.map(user => (
+                  <tr key={user.id}>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{getUserType(user.user_profile)}</td>
+                    <td>
+                      <button type="button">
+                        <EditIcon size={20} />
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        onClick={() => handleDelete(user.id)}
+                      >
+                        <DeleteIcon size={20} />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </TableContainer>
+        </Container>
+      ) : (
+        <CreateUser />
+      )}
     </>
   );
 };

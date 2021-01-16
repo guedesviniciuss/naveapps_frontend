@@ -107,20 +107,3 @@ export const Button = styled.button`
     vertical-align: middle;
   }
 `;
-
-/**
- *
-  ${props =>
-    props.remove &&
-    css`
-      border-color: #c53030;
-    `}
-
-  ${props =>
-    props.edit &&
-    css`
-      border-color: #79dbd9;
-      color: #79dbd9;
-    `}
- *
- */

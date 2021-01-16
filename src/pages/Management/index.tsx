@@ -1,10 +1,11 @@
-import React, { useState, useEffect, MouseEvent } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   FaTrashAlt as DeleteIcon,
   FaUndo as UpdateIcon,
   FaPlus,
 } from 'react-icons/fa';
 
+import CreateApp from '../../components/CreateApp';
 import Header from '../../components/Header';
 import api from '../../services/api';
 
@@ -21,6 +22,7 @@ interface Project {
 
 const Dashboard: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
+  const [createProject, setCreateProject] = useState(false);
 
   useEffect(() => {
     async function getApiProjects(): Promise<void> {
@@ -37,62 +39,73 @@ const Dashboard: React.FC = () => {
     getApiProjects();
   }, []);
 
-  async function handleDelete(id: string): Promise<void> {
-    const application = await api.delete(`/applications/${id}`);
+  const handleDeleteApp = useCallback(
+    async (id: string) => {
+      await api.delete(`/applications/${id}`);
 
-    console.log(application.data);
+      const projectsUpdated = projects.filter(p => p.id !== id);
+      setProjects(() => [...projectsUpdated]);
+    },
+    [projects],
+  );
 
-    const projectsUpdated = projects.filter(p => p.id !== id);
-    setProjects([...projectsUpdated]);
-  }
+  const handleCreateApp = useCallback(() => {
+    setCreateProject(() => true);
+  }, []);
 
   return (
     <>
       <Header />
-      <Container>
-        <Hero>
-          <h1>
-            Gerencie aqui as <b>suas aplicações</b>
-          </h1>
-          <button type="button">
-            <FaPlus />
-            Criar Aplicação
-          </button>
-        </Hero>
-        <TableContainer>
-          <table>
-            <thead>
-              <tr>
-                <th>Título</th>
-                <th>Criado</th>
-                <th>Atualizado</th>
-                <th>Editar</th>
-                <th>Remover</th>
-              </tr>
-            </thead>
+      {!createProject ? (
+        <>
+          <Container>
+            <Hero>
+              <h1>
+                Gerencie aqui as <b>suas aplicações</b>
+              </h1>
+              <button type="button" onClick={handleCreateApp}>
+                <FaPlus />
+                Criar Aplicação
+              </button>
+            </Hero>
+            <TableContainer>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Título</th>
+                    <th>Criado</th>
+                    <th>Atualizado</th>
+                    <th>Editar</th>
+                    <th>Remover</th>
+                  </tr>
+                </thead>
 
-            <tbody>
-              {projects?.map(project => (
-                <tr key={project.id}>
-                  <td>{project.name}</td>
-                  <td>{dateConverter(project.created_at)}</td>
-                  <td>{dateConverter(project.updated_at)}</td>
-                  <td>
-                    <Button>
-                      <UpdateIcon size={20} />
-                    </Button>
-                  </td>
-                  <td>
-                    <Button onClick={() => handleDelete(project.id)}>
-                      <DeleteIcon size={20} />
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </TableContainer>
-      </Container>
+                <tbody>
+                  {projects?.map(project => (
+                    <tr key={project.id}>
+                      <td>{project.name}</td>
+                      <td>{dateConverter(project.created_at)}</td>
+                      <td>{dateConverter(project.updated_at)}</td>
+                      <td>
+                        <Button>
+                          <UpdateIcon size={20} />
+                        </Button>
+                      </td>
+                      <td>
+                        <Button onClick={() => handleDeleteApp(project.id)}>
+                          <DeleteIcon size={20} />
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </TableContainer>
+          </Container>
+        </>
+      ) : (
+        <CreateApp />
+      )}
     </>
   );
 };
