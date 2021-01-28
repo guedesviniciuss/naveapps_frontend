@@ -1,4 +1,8 @@
 import styled, { css } from 'styled-components';
+import Carousel from 'react-elastic-carousel';
+import { shade } from 'polished';
+import LeftArrow from '../../assets/chevron-left.svg';
+import RightArrow from '../../assets/chevron-right.svg';
 
 interface AnchorProps {
   typeButton: 'like' | 'download' | 'info';
@@ -100,18 +104,43 @@ export const Title = styled.h1`
   color: #ed9351;
 `;
 
-export const Gallery = styled.div`
+export const Gallery = styled(Carousel)`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  align-self: center;
+  justify-content: flex-start;
   width: 100%;
-  margin-top: 30px;
+  height: 550px;
 
-  flex-wrap: wrap;
+  button {
+    background: none;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .rec.rec-arrow:disabled {
+    visibility: hidden;
+  }
+
+  .rec.rec-arrow {
+    transition: color 0.2s;
+    box-shadow: none;
+    color: #9197a9;
+    &:hover {
+      background: transparent;
+      color: ${shade(0.3, '#9197a9')};
+      border: none;
+    }
+    &:focus {
+      background: transparent;
+      color: ${shade(0.3, '#9197a9')};
+      border: none;
+    }
+  }
 
   img {
-    width: 350px;
-    height: 350px;
+    width: 100%;
+    height: 100%;
     margin-top: 30px;
   }
 `;

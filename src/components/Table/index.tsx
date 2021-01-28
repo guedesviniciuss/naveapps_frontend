@@ -1,41 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { Table as TableAntd, Divider } from 'antd';
+import { Table as TableAntd, Divider, Button } from 'antd';
 import 'antd/dist/antd.css';
+
+import { DelButton, UpdateButton } from './styles';
 
 interface TableProps {
   columns: object[];
   data: object[];
 }
 
-const rowSelection = {
-  onChange: ({ selectedRowKeys, selectedRows }: any) => {
-    console.log(
-      `selectedRowKeys: ${selectedRowKeys}`,
-      'selectedRows: ',
-      selectedRows,
-    );
-  },
-  getCheckboxProps: (record: any) => ({
-    disabled: record.name === 'Disabled User',
-    // Column configuration not to be checked
-    name: record.name,
-  }),
-};
+interface SelectedRowsData {
+  [key: string]: any;
+}
 
 const Table: React.FC<TableProps> = ({ columns, data }: TableProps) => {
   return (
     <div>
       <Divider />
 
-      <TableAntd
-        rowSelection={{
-          type: 'checkbox',
-          ...rowSelection,
-        }}
-        columns={columns}
-        dataSource={data}
-      />
+      <TableAntd columns={columns} dataSource={data} rowKey="id" />
     </div>
   );
 };

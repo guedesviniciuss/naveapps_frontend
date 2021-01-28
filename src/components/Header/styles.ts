@@ -8,18 +8,20 @@ export const MainHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
   div {
     padding: 0px 30px;
     display: flex;
     align-items: center;
     width: 100%;
+    justify-content: center;
     max-width: 1300px;
 
     ul {
       list-style-type: none;
       display: flex;
       justify-content: space-around;
+      align-items: center;
+      margin: 0;
       flex: 1;
       padding: 0 50px;
 

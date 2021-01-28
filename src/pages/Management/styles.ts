@@ -90,20 +90,16 @@ export const TableContainer = styled.section`
 `;
 
 export const Button = styled.button`
-  width: 42px;
-  height: 28px;
-  justify-content: center;
   border: 0px;
   border-radius: 5px 5px 5px 5px;
-  color: #fff;
-
-  font-weight: bold;
-  transition: background-color 0.2s;
   background: none;
-  color: inherit;
 
   svg {
-    display: inline-block;
-    vertical-align: middle;
+    color: #1890ff;
+    transition: color 0.2s;
+
+    &:hover {
+      color: ${shade(0.3, '#1890ff')};
+    }
   }
 `;

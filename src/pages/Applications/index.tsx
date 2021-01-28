@@ -100,11 +100,11 @@ const Applications: React.FC = () => {
               <h1>Descrição</h1>
               <p>{application.description}</p>
             </Description>
-            <Carousel isRTL={false}>
+            <Gallery isRTL={false} enableAutoPlay autoPlaySpeed={1500}>
               {application.gallery?.map(image => (
                 <img src={`http://localhost:3333/${image}`} alt="" />
               ))}
-            </Carousel>
+            </Gallery>
             <iframe
               title={application.id}
               width="100%"

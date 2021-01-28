@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { DropzoneArea } from 'material-ui-dropzone';
+import React, { InputHTMLAttributes, useEffect, useRef, useState } from 'react';
+import { DropzoneArea, DropzoneAreaBaseProps } from 'material-ui-dropzone';
 import { withStyles } from '@material-ui/core/styles';
+import { useField } from '@unform/core';
 
 const styles = {
   root: {
@@ -17,14 +18,27 @@ const styles = {
   },
 };
 
-const Dropzone: React.FC = () => {
+interface DropzoneProps {
+  name: string;
+}
+
+const Dropzone: React.FC<DropzoneProps> = ({ name, ...rest }) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { fieldName, defaultValue, registerField, error } = useField(name);
   const [signedDocumentName, setSignedDocumentName] = useState(
     'Selecione ou solte o arquivo aqui',
   );
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: inputRef.current,
+      path: 'value',
+    });
+  }, [fieldName, registerField]);
   return (
-    <form>
-      <DropzoneArea />
-    </form>
+    <>
+      <DropzoneArea {...rest} />
+    </>
   );
 };
 export default withStyles(styles)(DropzoneArea);

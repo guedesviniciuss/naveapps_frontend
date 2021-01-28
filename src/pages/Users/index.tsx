@@ -1,24 +1,24 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import {
-  FaTrashAlt as DeleteIcon,
-  FaPencilAlt as EditIcon,
-  FaUser,
-} from 'react-icons/fa';
+import { FiEdit as UpdateIcon, FiUser, FiTrash } from 'react-icons/fi';
 
+import Table from '../../components/Table';
 import Header from '../../components/Header';
 import CreateUser from '../../components/CreateUser';
 
 import api from '../../services/api';
 
 import getUserType from '../../utils/getUserType';
+import dateConverter from '../../utils/dateConverter';
 
-import { Container, Hero, TableContainer } from './styles';
+import { Container, Hero, Button } from './styles';
 
 interface User {
   id: string;
   name: string;
   email: string;
   user_profile: number;
+  created_at: string;
+  updated_at: string;
 }
 
 const UserDashboard: React.FC = () => {
@@ -31,7 +31,7 @@ const UserDashboard: React.FC = () => {
         headers: {
           Authorization:
             'Bearer ' +
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemF0aW9uIjoyMDQ4LCJpYXQiOjE2MDQzNDMyNjAsImV4cCI6MTYwNDQyOTY2MCwic3ViIjoiNzg4Y2YyZTctZWVjMC00ZDM4LWE3MGItMzZmNjBiOGE5ZjFlIn0.rTMUAVBkA8hXWoXdHsvyd2yr-lV9D0pobepyoxhD_1s',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemF0aW9uIjoyMDQ4LCJpYXQiOjE2MTE3OTU0NzAsImV4cCI6MTYxMTg4MTg3MCwic3ViIjoiMjlmMGM5YzktOTQxYS00ZmZhLWE0YmUtNjNlYzA2NTI5ZjUwIn0.95TEOZMvDA8eaxaJh_26Qj6QBfXGXVP4QH_kEPMHiIc',
         },
       });
       setUsers([...users, ...response.data]);
@@ -39,21 +39,6 @@ const UserDashboard: React.FC = () => {
 
     getApiUsers();
   }, []);
-
-  const dataSource = [
-    {
-      key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
-    },
-    {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
-    },
-  ];
 
   async function handleDelete(id: string): Promise<void> {
     const application = await api.delete(`/users/${id}`);
@@ -65,6 +50,48 @@ const UserDashboard: React.FC = () => {
 
     console.log(id);
   }
+
+  const columns = [
+    {
+      title: 'Nome',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: 'Permissao',
+      dataIndex: 'user_profile',
+      key: 'user_profile',
+      align: 'center',
+    },
+    {
+      title: 'Criado Em',
+      dataIndex: 'created_at',
+      render: (data: string) => <>{dateConverter(data)}</>,
+    },
+    {
+      title: 'Editado Em',
+      dataIndex: 'updated_at',
+      render: (data: string) => <>{dateConverter(data)}</>,
+    },
+    {
+      title: 'Editar',
+      align: 'center',
+      render: (text: string, record: any) => (
+        <Button onClick={() => console.log(record.id)}>
+          <UpdateIcon size={20} />
+        </Button>
+      ),
+    },
+    {
+      title: 'Excluir',
+      align: 'center',
+      render: (text: string, record: any) => (
+        <Button onClick={() => handleDelete(record.id)}>
+          <FiTrash size={20} />
+        </Button>
+      ),
+    },
+  ];
 
   const handleCreateUser = useCallback(() => {
     setCreateUser(() => true);
@@ -80,46 +107,12 @@ const UserDashboard: React.FC = () => {
               Gerencie aqui os <b>seus usuários</b>
             </h1>
             <button type="button" onClick={handleCreateUser}>
-              <FaUser />
+              <FiUser />
               Criar Usuário
             </button>
           </Hero>
-          <TableContainer>
-            <table>
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>E-Mail</th>
-                  <th>Tipo</th>
-                  <th>Editar</th>
-                  <th>Remover</th>
-                </tr>
-              </thead>
 
-              <tbody>
-                {users?.map(user => (
-                  <tr key={user.id}>
-                    <td>{user.name}</td>
-                    <td>{user.email}</td>
-                    <td>{getUserType(user.user_profile)}</td>
-                    <td>
-                      <button type="button">
-                        <EditIcon size={20} />
-                      </button>
-                    </td>
-                    <td>
-                      <button
-                        type="button"
-                        onClick={() => handleDelete(user.id)}
-                      >
-                        <DeleteIcon size={20} />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </TableContainer>
+          <Table data={users} columns={columns} />
         </Container>
       ) : (
         <CreateUser />
