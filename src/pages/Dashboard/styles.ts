@@ -21,6 +21,8 @@ export const Partners = styled.div`
   }
 
   div {
+    display: flex;
+    align-items: flex-end;
     img {
       width: 64px;
 
@@ -96,6 +98,8 @@ export const Projects = styled.div`
     text-decoration: none;
 
     display: flex;
+    justify-content: center;
+    align-items: center;
 
     transition: transform 0.5s;
 
@@ -118,6 +122,7 @@ export const Projects = styled.div`
     div {
       margin: 0 16px;
       flex: 1;
+      align-items: center;
 
       strong {
         font-size: 20px;
@@ -131,17 +136,15 @@ export const Projects = styled.div`
       }
 
       div {
-        display: block;
         display: flex;
         justify-content: start;
         align-items: center;
-
         margin-left: 0;
         margin-top: 10px;
 
         p {
-          margin-top: 0px;
           font-size: 15px;
+          margin-bottom: 0;
           font-weight: bold;
           color: red;
         }

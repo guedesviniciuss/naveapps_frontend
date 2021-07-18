@@ -5,15 +5,14 @@ import React, {
   AnchorHTMLAttributes,
 } from 'react';
 import { FiEdit as UpdateIcon, FiPlus, FiTrash } from 'react-icons/fi';
-
-import { Button as ButtonAntD } from 'antd';
-import CreateApp from '../../components/CreateApp';
+import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import Table from '../../components/Table';
 import api from '../../services/api';
 
 import { Container, Hero, Button } from './styles';
 import dateConverter from '../../utils/dateConverter';
+import { useAuth } from '../../hooks/auth';
 
 interface Project {
   id: string;
@@ -24,15 +23,13 @@ interface Project {
 
 const Dashboard: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
-  const [createProject, setCreateProject] = useState(false);
+  const { token } = useAuth();
 
   useEffect(() => {
     async function getApiProjects(): Promise<void> {
       const response = await api.get<Project[]>('/applications/proprietary', {
         headers: {
-          Authorization:
-            'Bearer ' +
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemF0aW9uIjoyMDQ4LCJpYXQiOjE2MTE3OTU0NzAsImV4cCI6MTYxMTg4MTg3MCwic3ViIjoiMjlmMGM5YzktOTQxYS00ZmZhLWE0YmUtNjNlYzA2NTI5ZjUwIn0.95TEOZMvDA8eaxaJh_26Qj6QBfXGXVP4QH_kEPMHiIc',
+          Authorization: `Bearer ${token}`,
         },
       });
       setProjects([...projects, ...response.data]);
@@ -46,9 +43,7 @@ const Dashboard: React.FC = () => {
       console.log(`o ID eh ${id}`);
       await api.delete(`/applications/${id}`, {
         headers: {
-          Authorization:
-            'Bearer ' +
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemF0aW9uIjoyMDQ4LCJpYXQiOjE2MTE3OTU0NzAsImV4cCI6MTYxMTg4MTg3MCwic3ViIjoiMjlmMGM5YzktOTQxYS00ZmZhLWE0YmUtNjNlYzA2NTI5ZjUwIn0.95TEOZMvDA8eaxaJh_26Qj6QBfXGXVP4QH_kEPMHiIc',
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -57,10 +52,6 @@ const Dashboard: React.FC = () => {
     },
     [projects],
   );
-
-  const handleCreateApp = useCallback(() => {
-    setCreateProject(() => true);
-  }, []);
 
   const columns = [
     {
@@ -108,24 +99,21 @@ const Dashboard: React.FC = () => {
   return (
     <>
       <Header />
-      {!createProject ? (
-        <>
-          <Container>
-            <Hero>
-              <h1>
-                Gerencie aqui as <b>suas aplicações</b>
-              </h1>
-              <button type="button" onClick={handleCreateApp}>
-                <FiPlus />
-                Criar Aplicação
-              </button>
-            </Hero>
-            <Table data={projects} columns={columns} />
-          </Container>
-        </>
-      ) : (
-        <CreateApp />
-      )}
+      <>
+        <Container>
+          <Hero>
+            <h1>
+              Gerencie aqui as <b>suas aplicações</b>
+            </h1>
+
+            <Link to="/createapp">
+              <FiPlus />
+              Criar Aplicação
+            </Link>
+          </Hero>
+          <Table data={projects} columns={columns} />
+        </Container>
+      </>
     </>
   );
 };

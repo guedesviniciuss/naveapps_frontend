@@ -31,7 +31,7 @@ const UserDashboard: React.FC = () => {
         headers: {
           Authorization:
             'Bearer ' +
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemF0aW9uIjoyMDQ4LCJpYXQiOjE2MTE3OTU0NzAsImV4cCI6MTYxMTg4MTg3MCwic3ViIjoiMjlmMGM5YzktOTQxYS00ZmZhLWE0YmUtNjNlYzA2NTI5ZjUwIn0.95TEOZMvDA8eaxaJh_26Qj6QBfXGXVP4QH_kEPMHiIc',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemF0aW9uIjoyMDQ4LCJpYXQiOjE2MTM0MTI3MTksImV4cCI6MTYxMzQ5OTExOSwic3ViIjoiMjlmMGM5YzktOTQxYS00ZmZhLWE0YmUtNjNlYzA2NTI5ZjUwIn0.utf7T75V9ccIhYtg1q79zU-0LMNWru_73T3eWTMNLGk',
         },
       });
       setUsers([...users, ...response.data]);

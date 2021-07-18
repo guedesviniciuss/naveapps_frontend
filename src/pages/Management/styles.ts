@@ -26,7 +26,7 @@ export const Hero = styled.div`
     }
   }
 
-  button {
+  a {
     display: flex;
     justify-content: center;
     align-items: center;

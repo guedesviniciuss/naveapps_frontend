@@ -6,6 +6,7 @@ interface ContainerProps {
   isFocused: boolean;
   isFilled: boolean;
   isErrored: boolean;
+  isHidden: boolean;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -21,6 +22,11 @@ export const Container = styled.div<ContainerProps>`
   display: flex;
   align-items: center;
 
+  ${props =>
+    props.isHidden &&
+    css`
+      display: none;
+    `}
 
   ${props =>
     props.isFilled &&

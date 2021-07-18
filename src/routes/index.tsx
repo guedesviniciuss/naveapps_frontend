@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 
 import Dashboard from '../pages/Dashboard';
 import Applications from '../pages/Applications';
@@ -8,8 +8,9 @@ import SignUp from '../pages/SignUp';
 import Management from '../pages/Management';
 import UserDashboard from '../pages/Users';
 import ForgotPassword from '../pages/ForgotPassword';
+import CreateApp from '../pages/CreateApp';
 
-// import Route from './Route';
+import Route from './Route';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -20,6 +21,7 @@ const Routes: React.FC = () => (
     <Route path="/management" exact isPrivate component={Management} />
     <Route path="/users" isPrivate component={UserDashboard} />
     <Route path="/forgot-password" isPrivate component={ForgotPassword} />
+    <Route path="/createapp" isPrivate component={CreateApp} />
   </Switch>
 );
 

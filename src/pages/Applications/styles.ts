@@ -82,6 +82,9 @@ export const LikedInfo = styled.div`
   svg {
     margin-right: 10px;
   }
+  p {
+    margin-bottom: 0;
+  }
 `;
 
 export const Hero = styled.div`
